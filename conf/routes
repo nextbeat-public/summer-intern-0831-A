@@ -14,6 +14,9 @@ POST  /login                            controllers.app.AuthController.loginComm
 GET  /facility/list                    controllers.facility.FacilityController.list
 GET  /facility/search                  controllers.facility.FacilityController.search
 
+# --[ 施設ページ ]----------------------------------------------------------------
+GET  /review/list/{id}                   controllers.review.ReviewController.list(id)
+
 # --[ 特集ページ ]--------------------------------------------------------------
 GET  /recruit/intership-for-summer-21  controllers.recruit.InternshipForSummer21Controller.view
 
