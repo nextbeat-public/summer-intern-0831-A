@@ -28,7 +28,7 @@ object SiteViewValueNewUser {
   // ユーザ登録フォーム
   //~~~~~~~~~~~~~
   case class NewUserForm(
-                          picture: String,
+   //                       picture: String,
                           nameLast: String, // 名前 (姓)
                           nameFirst: String, // 名前 (名)
                           email: String, // メールアドレス(重複あり)
@@ -36,7 +36,7 @@ object SiteViewValueNewUser {
                           address: String, // 住所
                           password: String, // パスワード
                         ) {
-    def toUser =
+    def toUser(picture: String) =
       User(None, picture, nameLast, nameFirst, email, pref, address)
 
     def toUserPassword(id: User.Id) =
@@ -46,7 +46,7 @@ object SiteViewValueNewUser {
   // --[ フォーム定義 ]---------------------------------------------------------
   val formNewUser = Form(
     mapping(
-      "picture" -> nonEmptyText,
+  //    "picture" -> nonEmptyText,
       "nameLast" -> nonEmptyText,
       "nameFirst" -> nonEmptyText,
       "email" -> email,

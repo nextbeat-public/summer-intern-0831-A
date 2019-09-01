@@ -1,100 +1,85 @@
 @*
- * This file is part of the Nextbeat services.
- *
- * For the full copyright and license information,
- * please view the LICENSE file that was distributed with this source code.
- *@
-
+* This file is part of the Nextbeat services.
+*
+* For the full copyright and license information,
+* please view the LICENSE file that was distributed with this source code.
+*@
 @import views.html.helper
 @import model.site.app.SiteViewValueNewUser
 @import persistence.udb.model.User
 @import play.api.data.Form
 
 @(vv: SiteViewValueNewUser)(implicit messages: play.api.i18n.Messages)
-
 @** ユーザー登録フォーム *@
 @views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
-  @** --[ 見出し ]---------------------------------------------------------- *@
-  <h3 class="content__section header">
-    <span class="header__title">新規ユーザー登録</span>
-  </h3>
+    @** --[ 見出し ]---------------------------------------------------------- *@
+    <h3 class="content__section header">
+        <span class="header__title">新規ユーザー登録</span>
+    </h3>
+    @** --[ フォーム ]-------------------------------------------------------- *@
+    <div class="content__section form">
+    @helper.form(action = controllers.app.routes.NewUserCommitController.application(), 'enctype -> "multipart/form-data") {
 
-  @** --[ フォーム ]-------------------------------------------------------- *@
-  <div class="content__section form">
-    @helper.form(action = controllers.app.routes.NewUserCommitController.application()) {
+        <div>
+            <input type="file" id="image" name="picture" accept="image/png, image/jpeg, image/jpg">
+        </div>
+        @** 名前 *@
+        <div class="form__section name-container">
+            <span class="form__section name">
+            @helper.inputText(
+                vv.form("nameLast"),
+                '_label -> "名前(姓)",
+                '_showConstraints -> false
+            )
+            </span>
 
-      <div>
-        <span>
-          @helper.inputFile(
-            vv.form("picture"),
-            '_label -> "写真",
-            '_showConstraints -> false
-          )
-        </span>
-      </div>
-
-      @** 名前 *@
-      <div class="form__section name-container">
-        <span class="form__section name">
-          @helper.inputText(
-            vv.form("nameLast"),
-            '_label           -> "名前(姓)",
-            '_showConstraints -> false
-          )
-        </span>
-
-        <span class="form__section name">
-          @helper.inputText(
-            vv.form("nameFirst"),
-            '_label           -> "名前(名)",
-            '_showConstraints -> false
-          )
-        </span>
-      </div>
-
-      @** 住所: 都道府県 *@
-      <div class="form__section pref">
+            <span class="form__section name">
+            @helper.inputText(
+                vv.form("nameFirst"),
+                '_label -> "名前(名)",
+                '_showConstraints -> false
+            )
+            </span>
+        </div>
+        @** 住所: 都道府県 *@
+        <div class="form__section pref">
         @helper.select(
-        field   = vv.form("pref"),
-        options = vv.location.map(v => (v.id, v.namePref)),
-        '_label           -> "都道府県",
-        '_showConstraints -> false
+            field = vv.form("pref"),
+            options = vv.location.map(v => (v.id, v.namePref)),
+            '_label -> "都道府県",
+            '_showConstraints -> false
         )
-      </div>
-
-      @** 住所: 詳細 *@
-      <div class="form__section address">
+        </div>
+        @** 住所: 詳細 *@
+        <div class="form__section address">
         @helper.inputText(
-        vv.form("address"),
-        '_label           -> "住所",
-        '_showConstraints -> false
+            vv.form("address"),
+            '_label -> "住所",
+            '_showConstraints -> false
         )
-      </div>
-
-      @** メールアドレス *@
-      <div class="form__section email">
+        </div>
+        @** メールアドレス *@
+        <div class="form__section email">
         @helper.inputText(
-          vv.form("email"),
-          '_label           -> "メールアドレス",
-          '_showConstraints -> false
+            vv.form("email"),
+            '_label -> "メールアドレス",
+            '_showConstraints -> false
         )
-      </div>
-
-      @** パスワード *@
-      <div class="form__section email">
+        </div>
+        @** パスワード *@
+        <div class="form__section email">
         @helper.inputPassword(
-        vv.form("password"),
-        '_label           -> "パスワード",
-        '_showConstraints -> false
+            vv.form("password"),
+            '_label -> "パスワード",
+            '_showConstraints -> false
         )
-      </div>
-
-      @** 登録ボタン *@
-      <div class="form__section submit">
-        <button class="button button-stroked" type="submit">
-          <span class="submit__text">新規アカウント登録</span>
-        </button>
-      </div>
+        </div>
+        @** 登録ボタン *@
+        <div class="form__section submit">
+            <button class="button button-stroked" type="submit">
+                <span class="submit__text">新規アカウント登録</span>
+            </button>
+        </div>
     }
-  </div>
+    </div>
 }
