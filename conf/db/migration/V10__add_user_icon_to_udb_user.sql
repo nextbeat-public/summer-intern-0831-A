@@ -1,0 +1,1 @@
+alter table "udb_user" add "picture" varchar(255);
