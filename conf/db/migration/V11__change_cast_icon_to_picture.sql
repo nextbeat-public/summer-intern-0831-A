@@ -1,1 +1,1 @@
-alter table "cast" CHANGE COLUMN "icon" "picture" varchar(255);
+alter table "cast" CHANGE COLUMN "icon" "picture" TEXT;
