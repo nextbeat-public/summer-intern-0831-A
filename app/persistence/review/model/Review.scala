@@ -17,7 +17,7 @@ case class Review(
   id:          Option[Review.Id],                // 施設ID
   castId:      Long,
   userId:      Long,
-  title:       Char,
+  title:       String,
   body:        String,
   star:        Double,
   fun:         Double,
