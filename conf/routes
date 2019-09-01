@@ -14,6 +14,11 @@ POST  /login                            controllers.app.AuthController.loginComm
 GET  /facility/list                    controllers.facility.FacilityController.list
 GET  /facility/search                  controllers.facility.FacilityController.search
 
+# --[詳細ページ]----------------------------------------------------------------
+GET  /facility/detail/*castid              controllers.facility.FacilityDetailController.show(castid: Long)
+
+# --[レビュー機能]----------------------------------------------------------------
+
 # --[ 特集ページ ]--------------------------------------------------------------
 GET  /recruit/intership-for-summer-21  controllers.recruit.InternshipForSummer21Controller.view
 
