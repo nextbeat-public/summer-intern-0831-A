@@ -25,9 +25,11 @@ class ReviewDAO @javax.inject.Inject()(
   // --[ リソース定義 ] --------------------------------------------------------
   lazy val slick = TableQuery[ReviewTable]
 
-  def findAll: Future[Seq[Review]] =
+  def filterByCastId(castId: Long) : Future[Seq[Review]] =
     db.run {
-      slick.result
+      slick
+      .filter(_.castId === castId)
+        .result
     }
 
   /**
@@ -41,8 +43,8 @@ class ReviewDAO @javax.inject.Inject()(
 
     // Table's columns
     /* @1 */ def id            = column[Review.Id]    ("id", O.PrimaryKey, O.AutoInc)
-    /* @2 */ def castId        = column[String]    ("cast_id")
-    /* @3 */ def userId        = column[String]         ("user_id")
+    /* @2 */ def castId        = column[Long]    ("cast_id")
+    /* @3 */ def userId        = column[Long]         ("user_id")
     /* @6 */ def updatedAt     = column[LocalDateTime]  ("updated_at")
     /* @7 */ def createdAt     = column[LocalDateTime]  ("created_at")
 

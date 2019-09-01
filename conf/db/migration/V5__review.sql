@@ -4,5 +4,6 @@ CREATE TABLE "review" (
   "title"	VARCHAR(255),
   "body"	TEXT,
   "user_id"	INT NOT NULL,
-  "cast_id" INT NOT NULL
+  "cast_id" INT NOT NULL,
+  
 ) ENGINE=InnoDB;

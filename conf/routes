@@ -11,11 +11,11 @@ GET   /login                            controllers.app.AuthController.login
 POST  /login                            controllers.app.AuthController.loginCommit
 
 # --[ 施設ページ ]----------------------------------------------------------------
-GET  /facility/list                   controllers.facility.FacilityController.list
+GET  /facility/list          controllers.facility.FacilityController.list
 GET  /facility/search                  controllers.facility.FacilityController.search
 
 # --[ 施設ページ ]----------------------------------------------------------------
-GET  /review/list                  controllers.review.ReviewController.list
+GET  /review/list/*castId                  controllers.review.ReviewController.list(castId: Long)
 
 # --[ 特集ページ ]--------------------------------------------------------------
 GET  /recruit/intership-for-summer-21  controllers.recruit.InternshipForSummer21Controller.view

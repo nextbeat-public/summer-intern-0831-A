@@ -16,9 +16,9 @@ class ReviewController @javax.inject.Inject()(
   /**
     * 施設一覧ページ
     */
-  def list = (Action andThen AuthenticationAction()).async { implicit request =>
+  def list(castId: Long) = (Action andThen AuthenticationAction()).async { implicit request =>
     for {
-      reviewSeq <- reviewDao.findAll
+      reviewSeq <- reviewDao.filterByCastId(castId)
     } yield {
       val vv = SiteViewValueReviewList(
         layout     = ViewValuePageLayout(id = request.uri),
