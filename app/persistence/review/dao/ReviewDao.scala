@@ -45,11 +45,11 @@ class ReviewDAO @javax.inject.Inject()(
     /* @1 */ def id            = column[Review.Id]      ("id", O.PrimaryKey, O.AutoInc)
     /* @2 */ def castId        = column[Long]           ("cast_id")
     /* @3 */ def userId        = column[Long]           ("user_id")
-    /* @6 */ def title:        = column[Char]           ("title")
-             def body:         = column[String]         ("body")
-             def star:         = column[Double]         ("star")
-             def fun:          = column[Double]         ("fun")
-             def hospitality:  = column[Double]         ("hospitality")
+    /* @6 */ def title         = column[Char]           ("title")
+             def body          = column[String]         ("body")
+             def star          = column[Double]         ("star")
+             def fun           = column[Double]         ("fun")
+             def hospitality   = column[Double]         ("hospitality")
              def createdAt     = column[LocalDateTime]  ("created_at")
 
     // The * projection of the table
@@ -61,6 +61,5 @@ class ReviewDAO @javax.inject.Inject()(
       /** The bidirectional mappings : Model => Tuple(table) */
       (v: TableElementType) => Review.unapply(v)
       )
-    )
   }
 }
