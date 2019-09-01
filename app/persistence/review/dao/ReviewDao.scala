@@ -42,22 +42,25 @@ class ReviewDAO @javax.inject.Inject()(
 
 
     // Table's columns
-    /* @1 */ def id            = column[Review.Id]    ("id", O.PrimaryKey, O.AutoInc)
-    /* @2 */ def castId        = column[Long]    ("cast_id")
-    /* @3 */ def userId        = column[Long]         ("user_id")
-    /* @6 */ def updatedAt     = column[LocalDateTime]  ("updated_at")
-    /* @7 */ def createdAt     = column[LocalDateTime]  ("created_at")
+    /* @1 */ def id            = column[Review.Id]      ("id", O.PrimaryKey, O.AutoInc)
+    /* @2 */ def castId        = column[Long]           ("cast_id")
+    /* @3 */ def userId        = column[Long]           ("user_id")
+    /* @6 */ def title:        = column[Char]           ("title")
+             def body:         = column[String]         ("body")
+             def star:         = column[Double]         ("star")
+             def fun:          = column[Double]         ("fun")
+             def hospitality:  = column[Double]         ("hospitality")
+             def createdAt     = column[LocalDateTime]  ("created_at")
 
     // The * projection of the table
     def * = (
-      id.?, castId, userId, updatedAt, createdAt
+      id.?, castId, userId, title, body, star, fun, hospitality, createdAt
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
       (Review.apply _).tupled,
       /** The bidirectional mappings : Model => Tuple(table) */
-      (v: TableElementType) => Review.unapply(v).map(_.copy(
-        _4 = LocalDateTime.now
-      ))
+      (v: TableElementType) => Review.unapply(v)
+      )
     )
   }
 }

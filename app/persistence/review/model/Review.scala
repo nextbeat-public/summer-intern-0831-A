@@ -17,7 +17,11 @@ case class Review(
   id:          Option[Review.Id],                // 施設ID
   castId:      Long,
   userId:      Long,
-  updatedAt:   LocalDateTime = LocalDateTime.now,  // データ更新日
+  title:       Char,
+  body:        String,
+  star:        Double,
+  fun:         Double,
+  hospitality: Double,
   createdAt:   LocalDateTime = LocalDateTime.now   // データ作成日
 )
 
