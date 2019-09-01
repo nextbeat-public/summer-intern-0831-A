@@ -14,6 +14,7 @@ import slick.jdbc.JdbcProfile
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
 import persistence.profile.model.Profile
+import persistence.cast.model.Cast
 import persistence.geo.model.Location
 
 // DAO: 施設情報
@@ -36,6 +37,13 @@ class ProfileDAO @javax.inject.Inject()(
         .filter(_.id === id)
         .result.headOption
     }
+  
+  // def get_store_id(id: String): Future[Option[Profile]] =
+  //   db.run {
+  //     slick
+  //       .filter(_.user_id === id)
+  //       .result.headOption
+  //   }
 
   /**
    * 施設を全件取得する
