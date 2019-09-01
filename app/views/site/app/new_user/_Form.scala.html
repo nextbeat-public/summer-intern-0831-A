@@ -23,6 +23,16 @@
   <div class="content__section form">
     @helper.form(action = controllers.app.routes.NewUserCommitController.application()) {
 
+      <div>
+        <span>
+          @helper.inputFile(
+            vv.form("picture"),
+            '_label -> "写真",
+            '_showConstraints -> false
+          )
+        </span>
+      </div>
+
       @** 名前 *@
       <div class="form__section name-container">
         <span class="form__section name">
