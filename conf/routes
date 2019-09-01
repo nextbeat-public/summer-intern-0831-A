@@ -14,6 +14,9 @@ POST  /login                            controllers.app.AuthController.loginComm
 GET  /facility/list          controllers.facility.FacilityController.list
 GET  /facility/search                  controllers.facility.FacilityController.search
 
+# --[詳細ページ]----------------------------------------------------------------
+GET  /cast/detail/*castid              controllers.profile.ProfileDetailController.show(castid: Long)
+
 # --[ 施設ページ ]----------------------------------------------------------------
 GET  /review/list/*castId                  controllers.review.ReviewController.list(castId: Long)
 
