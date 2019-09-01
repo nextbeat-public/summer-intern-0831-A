@@ -5,15 +5,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-package controllers.facility
+package controllers.profile
 
 import play.api.i18n.I18nSupport
 import play.api.mvc.{AbstractController, MessagesControllerComponents}
-import persistence.facility.dao.FacilityDAO
-import persistence.facility.model.Facility
-import persistence.geo.model.Location
-import persistence.geo.dao.LocationDAO
-import model.site.facility.SiteViewValueFacilityDetail
 import model.component.util.ViewValuePageLayout
 import mvc.action.AuthenticationAction
 import persistence.profile.dao.ProfileDAO
@@ -37,9 +32,9 @@ class ProfileDetailController @javax.inject.Inject()(
     } yield {
       val vv = SiteViewValueProfileDetail(
         layout     = ViewValuePageLayout(id = request.uri),
-        facility = profileDetail
+        profile    = profileDetail
       )
-    Ok(views.html.site.facility.detail.Main(vv))
+    Ok(views.html.site.cast.detail.Main(vv))
     }
   }
 }

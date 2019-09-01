@@ -62,6 +62,7 @@ class ProfileDAO @javax.inject.Inject()(
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
       (Profile.apply _).tupled,
+      (v: TableElementType) => Profile.unapply(v)
     )
   }
 }

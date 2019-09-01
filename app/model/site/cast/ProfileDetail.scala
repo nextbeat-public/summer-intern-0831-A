@@ -15,5 +15,5 @@ import persistence.profile.model.Profile
 //~~~~~~~~~~~~~~~~~~~~~
 case class SiteViewValueProfileDetail(
   layout:   ViewValuePageLayout,
-  facility: Profile
+  profile: Profile
 )

@@ -15,7 +15,7 @@ GET  /facility/list                    controllers.facility.FacilityController.l
 GET  /facility/search                  controllers.facility.FacilityController.search
 
 # --[詳細ページ]----------------------------------------------------------------
-GET  /facility/detail/*castid              controllers.facility.FacilityDetailController.show(castid: Long)
+GET  /cast/detail/*castid              controllers.profile.ProfileDetailController.show(castid: Long)
 
 # --[ 特集ページ ]--------------------------------------------------------------
 GET  /recruit/intership-for-summer-21  controllers.recruit.InternshipForSummer21Controller.view
