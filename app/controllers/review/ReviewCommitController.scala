@@ -19,14 +19,11 @@ class ReviewCommitController @Inject()(
   def post = (Action andThen AuthenticationAction()).async { implicit request =>
     SiteViewValueReview.formReview.bindFromRequest.fold(
         errors => {
-            for {
-                reviewSeq <- reviewDao.filterByCastId(castId)
-    } yield {
-      val vv = SiteViewValueReviewList(
-        layout     = ViewValuePageLayout(id = request.uri),
-        reviews = reviewSeq
-      )
-      Ok(views.html.site.review.list.Main(vv))
-    }
+            val vv = SiteViewReview(
+                layout  = ViewValuePageLayout(id = request.uri),
+                form    = errors
+            )
+            Ok(views.html.site.review.post.Main(vv))
+        }
   }
 }
