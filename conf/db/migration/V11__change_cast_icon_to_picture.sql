@@ -1,0 +1,1 @@
+alter table "cast" CHANGE COLUMN "icon" "picture" TEXT;
