@@ -14,11 +14,12 @@ class ReviewCommitController @javax.inject.Inject()(
     ) extends AbstractController(cc) with I18nSupport {
         implicit lazy val executionContext = defaultExecutionContext
 
-    def viewForReview(castId: Long) = Action.async {implicit request =>
+    def viewForReview(castId: Long) = (Action andThen AuthenticationAction()).async {implicit request =>
       val vv = SiteViewValueReview(
             layout = ViewValuePageLayout(id = request.uri),
             form = SiteViewValueReview.formReview,
             castId = castId,
+            userId = request.userId,
         )
         Future.successful(Ok(views.html.site.review.post.Main(vv)))
     }
@@ -30,12 +31,13 @@ class ReviewCommitController @javax.inject.Inject()(
                     layout  = ViewValuePageLayout(id = request.uri),
                     form    = errors,
                     castId = castId,
+                    userId = request.userId,
                 )
                 Future.successful(Ok(views.html.site.review.post.Main(vv)))
             },
             form => {
                 for{
-                    id <- daoReviewCommit.post(form.toReview(castId))
+                    id <- daoReviewCommit.post(form.toReview(castId, request.userId))
                 } yield {
                 Redirect("/cast/list")
                 }

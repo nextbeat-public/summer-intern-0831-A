@@ -1,42 +1,50 @@
-@*
-* This file is part of the Nextbeat services.
-*
-* For the full copyright and license information,
-* please view the LICENSE file that was distributed with this source code.
-*@
-@import controllers.routes.Assets
-@(vv: model.component.util.ViewValuePageLayout)(content: play.twirl.api.Html)(
-        implicit messages: play.api.i18n.Messages
-)
+@* * This file is part of the Nextbeat services. * * For the full copyright and
+license information, * please view the LICENSE file that was distributed with
+this source code. *@ @import controllers.routes.Assets @(vv:
+model.component.util.ViewValuePageLayout)(content: play.twirl.api.Html)(
+implicit messages: play.api.i18n.Messages )
 <!DOCTYPE html>
 <html lang="ja">
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-        <meta charset="UTF-8">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta charset="UTF-8" />
 
-        @** 各種設定 **@
-        <link rel="icon" type="image/png" href=@Assets.versioned("images/common/favicon.png")>
+    @** 各種設定 **@ <link rel="icon" type="image/png"
+    href=@Assets.versioned("images/common/favicon.png")> @** SEO関連**@
+    @views.html.common.tags.SeoTagsAtHead(vv)
+    <meta name="id" content="@vv.id" />
 
-        @** SEO関連**@
-        @views.html.common.tags.SeoTagsAtHead(vv)
-        <meta name="id" content="@vv.id">
-
-        @** CSS登録 *@
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i">
-            <!-- <link rel="stylesheet" type="text/css" href=@Assets.versioned("app/main.css")> -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        @** HTMLの動作や状態を指定 *@
-        <meta http-equiv="Pragma" content="no-cache">
-        <meta http-equiv="Cache-Control" content="no-cache">
-        <meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00GMT">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-            <!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
-    </head>
-    <body style="background: #f0f0f0;">
-        @** コンテンツ *@
-        @views.html.common.tags.SimpleScript()
-        @views.html.common.layout.NavGlobal(vv)
-        <main id="main-content">@content</main>
-        @*/ / @views.html.common.layout.NavFooter(vv)*@
-    </body>
+    @** CSS登録 *@
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i"
+    />
+    <!-- <link rel="stylesheet" type="text/css" href=@Assets.versioned("app/main.css")> -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.10.2/css/all.css"
+      integrity="sha384-rtJEYb85SiYWgfpCr0jn174XgJTn4rptSOQsMroFBPQSGLdOC5IbubP6lJ35qoM9"
+      crossorigin="anonymous"
+    />
+    @** HTMLの動作や状態を指定 *@
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00GMT" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
+  </head>
+  <body style="background: #f0f0f0;">
+    @** コンテンツ *@ @views.html.common.tags.SimpleScript()
+    @views.html.common.layout.NavGlobal(vv)
+    <main id="main-content">@content</main>
+    @*// @views.html.common.layout.NavFooter(vv)*@
+  </body>
 </html>
