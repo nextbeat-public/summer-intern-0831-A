@@ -183,7 +183,7 @@ body {
 #site-shop-common-breadcrumb-menu {
   background: #EDEFF0; }
   #site-shop-common-breadcrumb-menu .breadcrumb {
-    margin: 0 0;
+    margin: 0 auto;
     padding: 0;
     width: 750px;
     height: 25px;
