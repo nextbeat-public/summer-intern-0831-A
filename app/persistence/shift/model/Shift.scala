@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 // 施設情報 (sample)
 //~~~~~~~~~~~~~
 case class Shift(
-  id:           Option[Shift.Id],                // 施設ID
+  id:          Option[Shift.Id],                // 施設ID
   dayOfWeek:   String,
   startTime:   LocalDateTime,
   endTime:     LocalDateTime,

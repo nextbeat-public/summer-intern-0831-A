@@ -35,7 +35,7 @@ class ShiftDAO @javax.inject.Inject()(
 
     // The * projection of the table
     def * = (
-      id.?, day_of_week, start_time, end_time
+      id.?, dayOfWeek, startTime, endTime, castId
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
       (Shift.apply _).tupled,
