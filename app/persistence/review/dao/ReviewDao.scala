@@ -32,7 +32,7 @@ class ReviewDAO @javax.inject.Inject()(
         .result
     }
   
-  def post(data: Review): Future[Review.ID] =
+  def post(data: Review): Future[Review.Id] =
     db.run {
       data.id match {
         case None    => slick returning slick.map(_.id) += data
@@ -48,7 +48,7 @@ class ReviewDAO @javax.inject.Inject()(
     /* @1 */ def id            = column[Review.Id]      ("id", O.PrimaryKey, O.AutoInc)
     /* @2 */ def castId        = column[Long]           ("cast_id")
     /* @3 */ def userId        = column[Long]           ("user_id")
-    /* @6 */ def title         = column[Char]           ("title")
+    /* @6 */ def title         = column[String]           ("title")
              def body          = column[String]         ("body")
              def star          = column[Double]         ("star")
              def fun           = column[Double]         ("fun")

@@ -2,10 +2,12 @@ package model.site.review
 
 import com.github.t3hnar.bcrypt._
 import model.component.util.ViewValuePageLayout
-import model.site.app.SiteViewValueReview.ReviewForm
+import model.site.review.SiteViewValueReview.ReviewForm
 import persistence.review.model.Review
 import play.api.data.Form
 import play.api.data.Forms._
+import play.api.data.format.Formats._
+import java.time.LocalDateTime
 
 case class SiteViewValueReview(
     layout: ViewValuePageLayout,
@@ -15,23 +17,23 @@ case class SiteViewValueReview(
 object SiteViewValueReview {
 
     case class ReviewForm(
-        title:          Char,
+        title:          String,
         body:           String,
         star:           Double,
         fun:            Double,
         hospitality:    Double,
     ){
         def toReview =
-            Review(None, None, None, title, body, star, fun, hospitality, None)
+            Review(None, 1, 1, title, body, star, fun, hospitality, LocalDateTime.now())
     }
 
     val formReview = Form(
         mapping(
-            "title"         -> nonEmptyText,
-            "body"          -> nonEmptyText,
-            "star"          -> number(min=0.5, max=5),
-            "fun"           -> number(min=0.5, max=5),
-            "hospitality"   -> number(min=0.5, max=5),
+            "title"         -> text,
+            "body"          -> text,
+            "star"          -> of(doubleFormat),
+            "fun"           -> of(doubleFormat),
+            "hospitality"   -> of(doubleFormat),
         )(ReviewForm.apply)(ReviewForm.unapply)
     )
 }

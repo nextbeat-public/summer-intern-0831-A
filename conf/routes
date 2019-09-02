@@ -19,6 +19,7 @@ GET  /cast/detail/*castid               controllers.profile.ProfileDetailControl
 
 # --[ レビューページ ]----------------------------------------------------------------
 GET  /review/list/*castId               controllers.review.ReviewController.list(castId: Long)
+GET  /review/post                       controllers.review.ReviewCommitController.viewForReview
 POST /review/post                       controllers.review.ReviewCommitController.post
 
 # --[ 特集ページ ]--------------------------------------------------------------

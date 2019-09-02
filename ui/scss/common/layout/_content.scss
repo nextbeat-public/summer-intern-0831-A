@@ -8,7 +8,7 @@
 //- コンテンツ定義
 //-~~~~~~~~~~~~~~~~
 html {
-  min-width:  $content-width;
+  width:  $content-width;
   overflow-y: auto;
   overflow-x: auto;
   position:   relative;
@@ -19,7 +19,7 @@ body {
 }
 
 #nav-global {
-  min-width:  $content-width;
+  width:  $content-width;
   height:     $globalnav-height;
   margin:     auto;
   background: white;

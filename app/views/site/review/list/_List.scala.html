@@ -14,7 +14,7 @@
 @views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
   @** --[ 見出し ]---------------------------------------------------------- *@
   <h3 class="content__section header">
-    <span class="header__title">施設一覧</span>
+    <span class="header__title">みんなの声</span>
   </h3>
 
   @** --[ 一覧 ]-------------------------------------------------------- *@
@@ -25,7 +25,7 @@
           <div class="item-panel__wrapper">
             <header class="facility-item__header">
               <div class="name">
-                @review.userId
+                @review.title
               </div>
             </header>
             <section class="facility-item__content">
