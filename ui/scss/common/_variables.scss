@@ -39,7 +39,7 @@ $space-size-small:  15px;
 $space-size-micro:  10px;
 
 // Layout
-$content-width:     1120px;
-$container-width:   660px;
+$content-width:     750px; // iphoneなどのスマホ用にリサイズ
+$container-width:   700px;
 $globalnav-height:  80px;
-$sidenav-width:     240px;
+$sidenav-width:     40px;

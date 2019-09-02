@@ -12,30 +12,34 @@
 
 @** 施設検索一覧 *@
 @views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
-  @** --[ 見出し ]---------------------------------------------------------- *@
-  <h3 class="content__section header">
-    <span class="header__title">施設一覧</span>
-  </h3>
-
-  @** --[ 一覧 ]-------------------------------------------------------- *@
-  <div class="content__section content">
-    @for(review <- vv.reviews) {
-      <article class="facility-list-item">
-        <a href="#">
-          <div class="item-panel__wrapper">
-            <header class="facility-item__header">
-              <div class="name">
-                @review.userId
+  <div class="row">
+    <div class="offset-1 col-8">
+        @** --[ 見出し ]---------------------------------------------------------- *@
+      <h3 class="content__section header">
+        <span class="header__title">みんなの声</span>
+      </h3>
+    
+      @** --[ 一覧 ]-------------------------------------------------------- *@
+      <div class="content__section content container">
+        @for(review <- vv.reviews) {
+          <article class="facility-list-item">
+            <a href="#">
+              <div class="item-panel__wrapper">
+                <header class="facility-item__header">
+                  <div class="name">
+                    @review.title
+                  </div>
+                </header>
+                <section class="facility-item__content">
+                  <div>
+                      @review.body
+                  </div>
+                </section>
               </div>
-            </header>
-            <section class="facility-item__content">
-              <div>
-                  @review.body
-              </div>
-            </section>
-          </div>
-        </a>
-      </article>
-    }
+            </a>
+          </article>
+        }
+      </div>
+    </div>
   </div>
 }

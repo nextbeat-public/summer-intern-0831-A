@@ -57,7 +57,7 @@ class AuthController @javax.inject.Inject()(
         } yield
           passwordOpt match {
             case Some(password) if form.password.isBcryptedSafe(password.hash).getOrElse(false) =>
-              Redirect("/home/")
+              Redirect("/cast/list/")
                 .withSession(
                   request.session + ("user_id" -> password.id.toString)
                 )

@@ -11,19 +11,25 @@ GET   /login                            controllers.app.AuthController.login
 POST  /login                            controllers.app.AuthController.loginCommit
 
 # --[ 施設ページ ]----------------------------------------------------------------
-GET  /facility/list          controllers.facility.FacilityController.list
-GET  /facility/search                  controllers.facility.FacilityController.search
+GET  /facility/list                     controllers.facility.FacilityController.list
+GET  /facility/search                   controllers.facility.FacilityController.search
+
+# --[ 一覧ページ ]----------------------------------------------------------------
+GET  /cast/list          controllers.cast.CastController.list
+GET  /cast/search                  controllers.cast.CastController.search
 
 # --[詳細ページ]----------------------------------------------------------------
-GET  /cast/detail/*castid              controllers.profile.ProfileDetailController.show(castid: Long)
+GET  /cast/detail/$castid<[0-9]+>               controllers.profile.ProfileDetailController.show(castid: Long)
 
-# --[ 施設ページ ]----------------------------------------------------------------
-GET  /review/list/*castId                  controllers.review.ReviewController.list(castId: Long)
+# --[ レビューページ ]----------------------------------------------------------------
+GET  /cast/detail/$castId<[0-9]+>/reviews               controllers.review.ReviewController.list(castId: Long)
+GET  /review/post                       controllers.review.ReviewCommitController.viewForReview
+POST /review/post                       controllers.review.ReviewCommitController.post
 
 # --[ 特集ページ ]--------------------------------------------------------------
 GET  /recruit/intership-for-summer-21  controllers.recruit.InternshipForSummer21Controller.view
 
 # --[ その他 ]------------------------------------------------------------------
 GET  /assets/*file  controllers.Assets.versioned(path = "/public", file)
-GET  /              controllers.ApplicationController.redirect(to = "/facility/list", from = "")
-GET  /*path         controllers.ApplicationController.redirect(to = "/facility/list", path: String)
+GET  /              controllers.ApplicationController.redirect(to = "/cast/list", from = "")
+GET  /*path         controllers.ApplicationController.redirect(to = "/cast/list", path: String)

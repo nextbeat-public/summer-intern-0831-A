@@ -13,7 +13,7 @@
     color:      white;
     background: black;
     .content__inner {
-      width:    920px;
+      width:    $content-width;
       margin:   auto;
       position: relative;
       padding:  $space-size-large 0;
