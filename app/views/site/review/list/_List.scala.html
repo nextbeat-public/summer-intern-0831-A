@@ -9,34 +9,56 @@
 @import play.api.data.Form
 
 @(vv: SiteViewValueReviewList)(implicit messages: play.api.i18n.Messages)
-
 @** 施設検索一覧 *@
 @views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
-  <div class="row">
-    <div class="offset-1 col-8">
-        @** --[ 見出し ]---------------------------------------------------------- *@
-      <h3 class="content__section header">
-        <span class="header__title">みんなの声</span>
-      </h3>
-    
-      @** --[ 一覧 ]-------------------------------------------------------- *@
-      <div class="content__section content container">
-        @for(review <- vv.reviews) {
-          <article class="facility-list-item">
-            <a href="#">
-              <div class="item-panel__wrapper">
-                <header class="facility-item__header">
-                  <div class="name">
-                    @review.title
-                  </div>
-                </header>
-                <section class="facility-item__content">
-                  <div>
-                      @review.body
-                  </div>
-                </section>
+    <div style="font-size: 42px;">
+        <div class="container">
+            @** --[ 見出し ]---------------------------------------------------------- *@
+            <p class="content__section" style="font-size: 52px;">
+                <span class="header__title">みんなの声</span>
+            </p>
+
+            @** --[ 一覧 ]-------------------------------------------------------- *@
+            <div class="">
+            @for(review <- vv.reviews) {
+                <div class="facility-list-item card" style="background-color: #f4d100;">
+                    <div class="card-body" style="display: flex;
+                        align-items: center" >
+                        <div>
+                            <img src="https://lokeshdhakar.com/projects/lightbox2/images/image-4.jpg" width="120px" height="120px">
+                        </div>
+                        <div class="item-panel__wrapper" style="padding: 0 50px;
+                            width: 500px;">
+                            <div>
+                                <span style="font-size: 64px;
+                                    font-weight: bold;">
+                                @review.title
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                @review.body
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <i class="fas fa-star"></i>
+                                <span>@review.star</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-heart"></i>
+                                <span>@review.hospitality</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-laugh-squint"></i>
+                                <span>@review.fun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
             </div>
-        }
         </div>
     </div>
 }
