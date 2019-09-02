@@ -44,14 +44,14 @@
 
   @** --[ 一覧 ]-------------------------------------------------------- *@
   <div class="content__section content">
-    @for(store <- vv.store) {
-      @for(cast <- vv.cast) {
+    @for(pair <- vv.pairs) {
+     
       <article class="facility-list-item">
         <a href="#">
           <div class="item-panel__wrapper">
             <header class="facility-item__header">
               <div class="name">
-                @cast.name
+                @pair.cast.name
               </div>
             </header>
             <section class="facility-item__content">
@@ -60,13 +60,13 @@
                   <div class="address">
                     <label class="inline">住所:</label>
                     <p class="inline">
-                      @store.address
+                      @pair.store.address
                     </p>
                   </div>
                   <div class="description">
                     <label class="inline">備考:</label>
                     <p class="inline">
-                      @store.address
+                      @pair.store.address
                     </p>
                   </div>
                 </div>
@@ -75,7 +75,7 @@
           </div>
         </a>
       </article>
-    }
+    
     }
   </div>
 }
