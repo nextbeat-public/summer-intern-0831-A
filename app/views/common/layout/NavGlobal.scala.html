@@ -12,7 +12,7 @@
       <header id="nav-global" class="nav-global-simple content">
         <div class="content__inner" style="display: flex;">
           @** ロゴ *@
-          <h1 class="content__section logo col-4">
+          <h1 class="content__section logo col-7 text-right">
             <a class="logo__inner" href="/" style="width: 20%;height: 20%;">
               @views.html.common.component.image.ResponsiveImage(
                 alt     = vv.messages("_image-service-logo"),
@@ -22,7 +22,7 @@
               )
             </a>
           </h1>
-          <div class="menu col-8 text-right">
+          <div class="menu col-4 text-right">
             <a class="menu__item" href="@controllers.app.routes.AuthController.login()">ログイン</a>
           </div>
         </div>
