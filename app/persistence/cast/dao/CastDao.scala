@@ -5,7 +5,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-package persistence.profile.dao
+package persistence.cast.dao
 
 import java.time.LocalDateTime
 import scala.concurrent.Future
@@ -13,65 +13,62 @@ import scala.concurrent.Future
 import slick.jdbc.JdbcProfile
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
-import persistence.profile.model.Profile
 import persistence.cast.model.Cast
 import persistence.geo.model.Location
-import persistence.store.model.Store
+import persistence.profile.model.Profile
 
 // DAO: 施設情報
 //~~~~~~~~~~~~~~~~~~
-class ProfileDAO @javax.inject.Inject()(
+class CastDAO @javax.inject.Inject()(
   val dbConfigProvider: DatabaseConfigProvider
 ) extends HasDatabaseConfigProvider[JdbcProfile] {
   import profile.api._
 
   // --[ リソース定義 ] --------------------------------------------------------
-  lazy val slick = TableQuery[ProfileTable]
+  lazy val slick = TableQuery[CastTable]
 
   // --[ データ処理定義 ] ------------------------------------------------------
   /**
    * 施設を取得
    */
-  def get(id: Profile.Id): Future[Option[Profile]] =
+  def get(id: Cast.Id): Future[Option[Cast]] =
     db.run {
       slick
         .filter(_.id === id)
         .result.headOption
     }
-  
-  def findByStoreId(ids: Seq[Store.Id]): Future[Seq[Profile]] =
+
+  def findByUserId(ids: Seq[Profile.UserId]): Future[Seq[Cast]] =
     db.run {
       slick
-        .filter(_.store_id inSet ids)
+        .filter(_.id inSet ids)
         .result
     }
 
   /**
    * 施設を全件取得する
    */
-  def findAll: Future[Seq[Profile]] =
+  def findAll: Future[Seq[Cast]] =
     db.run {
       slick.result
     }
 
   // --[ テーブル定義 ] --------------------------------------------------------
-  class ProfileTable(tag: Tag) extends Table[Profile](tag, "profile") {
+  class CastTable(tag: Tag) extends Table[Cast](tag, "cast") {
 
 
     // Table's columns
-    /* @1 */ def id            = column[Profile.Id]     ("id", O.PrimaryKey, O.AutoInc)
-    /* @2 */ def comment       = column[String]         ("comment")
-    /* @3 */ def description   = column[String]         ("description")
-    /* @4 */ def user_id       = column[Long]         ("user_id")
-    /* @5 */ def store_id      = column[Long]         ("store_id")
+    /* @1 */ def id            = column[Cast.Id]     ("id", O.PrimaryKey, O.AutoInc)
+    /* @2 */ def name          = column[String]         ("name")
+    /* @3 */ def picture       = column[String]         ("picture")
 
     // The * projection of the table
     def * = (
-      id.?, comment, description, user_id, store_id
+      id.?, name, picture
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
-      (Profile.apply _).tupled,
-      (v: TableElementType) => Profile.unapply(v)
+      (Cast.apply _).tupled,
+      (v: TableElementType) => Cast.unapply(v)
     )
   }
 }

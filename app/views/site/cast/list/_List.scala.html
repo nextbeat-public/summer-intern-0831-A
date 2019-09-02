@@ -1,0 +1,81 @@
+@*
+ * This file is part of the Nextbeat services.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+@import views.html.helper
+@import model.site.cast.SiteViewValueProfileList
+@import play.api.data.Form
+
+@import persistence.store.model.StoreSearch
+@(vv: SiteViewValueProfileList, form: Form[StoreSearch])(implicit messages: play.api.i18n.Messages)
+
+@** 施設検索一覧 *@
+@views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
+  @** --[ 見出し ]---------------------------------------------------------- *@
+  <h3 class="content__section header">
+    <span class="header__title">施設一覧</span>
+  </h3>
+
+  @** --[ 検索フォーム ]---------------------------------------------------------- *@
+  <div class="content__section form">
+    @helper.form(action = controllers.cast.routes.CastController.search) {
+
+      @** 都道府県 *@
+      <div class="form__section pref inline">
+        @helper.select(
+          field   = form("locationId"),
+          options = vv.location.map(v => (v.id, v.namePref)),
+          '_label           -> "都道府県",
+          '_default         -> "未選択",
+          '_showConstraints -> false
+        )
+      </div>
+
+      @** 登録ボタン *@
+      <div class="form__section submit inline">
+        <button class="button" type="submit">
+          <span class="submit__text">検索</span>
+        </button>
+      </div>
+    }
+  </div>
+
+  @** --[ 一覧 ]-------------------------------------------------------- *@
+  <div class="content__section content">
+    @for(store <- vv.store) {
+      @for(cast <- vv.cast) {
+      <article class="facility-list-item">
+        <a href="#">
+          <div class="item-panel__wrapper">
+            <header class="facility-item__header">
+              <div class="name">
+                @cast.name
+              </div>
+            </header>
+            <section class="facility-item__content">
+              <div>
+                <div class="item-panel__content">
+                  <div class="address">
+                    <label class="inline">住所:</label>
+                    <p class="inline">
+                      @store.address
+                    </p>
+                  </div>
+                  <div class="description">
+                    <label class="inline">備考:</label>
+                    <p class="inline">
+                      @store.address
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </a>
+      </article>
+    }
+    }
+  </div>
+}

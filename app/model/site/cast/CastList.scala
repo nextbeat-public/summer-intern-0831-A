@@ -9,20 +9,12 @@ package model.site.cast
 
 import model.component.util.ViewValuePageLayout
 import persistence.geo.model.Location
-import persistence.profile.model.Profile
-import persistence.store.model.Store
-import persistence.cast.model.Cast
+import persistence.facility.model.Facility
 
 // 表示: 施設一覧
 //~~~~~~~~~~~~~~~~~~~~~
-case class SiteViewValueProfileDetail(
-  layout:   ViewValuePageLayout,
-  profile: Profile
-)
-
-case class SiteViewValueProfileList(
+case class SiteViewValueCastList(
   layout:   ViewValuePageLayout,
   location: Seq[Location],
-  store: Seq[Store],
-  cast:  Seq[Cast]
+  facilities: Seq[Facility]
 )
