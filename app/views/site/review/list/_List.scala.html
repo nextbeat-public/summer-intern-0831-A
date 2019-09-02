@@ -1,45 +1,74 @@
 @*
- * This file is part of the Nextbeat services.
- *
- * For the full copyright and license information,
- * please view the LICENSE file that was distributed with this source code.
- *@
+* This file is part of the Nextbeat services.
+*
+* For the full copyright and license information,
+* please view the LICENSE file that was distributed with this source code.
+*@
 @import views.html.helper
 @import model.site.review.SiteViewValueReviewList
 @import play.api.data.Form
 
 @(vv: SiteViewValueReviewList)(implicit messages: play.api.i18n.Messages)
-
 @** 施設検索一覧 *@
 @views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
-  <div class="row">
-    <div class="offset-1 col-8">
-        @** --[ 見出し ]---------------------------------------------------------- *@
-      <h3 class="content__section header">
-        <span class="header__title">みんなの声</span>
-      </h3>
-    
-      @** --[ 一覧 ]-------------------------------------------------------- *@
-      <div class="content__section content container">
-        @for(review <- vv.reviews) {
-          <article class="facility-list-item">
-            <a href="#">
-              <div class="item-panel__wrapper">
-                <header class="facility-item__header">
-                  <div class="name">
-                    @review.title
-                  </div>
-                </header>
-                <section class="facility-item__content">
-                  <div>
-                      @review.body
-                  </div>
-                </section>
-              </div>
-            </a>
-          </article>
-        }
-      </div>
+    <div style="font-size: 42px;">
+        <div class="">
+            @** --[ 見出し ]---------------------------------------------------------- *@
+            <h2 class="content__section header text-center mt-5" style="font-size: 50px;
+                margin-bottom: 50px">
+                みんなの声
+            </h2>
+
+            @** --[ 一覧 ]-------------------------------------------------------- *@
+            <article class="content__section content" style="margin: 0 80px;">
+            @for(review <- vv.reviews) {
+                <article class="facility-list-item mb-5" style="display: flex;
+                    border-radius: 15px;
+                    background-color: #f4d100;">
+                    <div class="" style="display: flex;
+                        align-items: center" >
+                        <div class="name col-3" style="font-size: 40px;">
+                            <img src="https://s3-ap-northeast-1.amazonaws.com/www.nextbeat.co.jp/wp-content/uploads/2019/01/30160727/kawai_1.png" alt=""
+                            style="width: 170px;
+                                height: 170px;
+                                margin: 10px;">
+
+                        </div>
+                        <div class="item-panel__wrapper" style="padding: 0 50px;
+                            width: 400px;">
+                            <div>
+                                <span style="font-size: 64px;
+                                    font-weight: bold;">
+                                @review.title
+                                </span>
+                            </div>
+                            <div style="word-break: break-all;">
+                                <span>
+                                @review.body
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <i class="fas fa-star" style="margin-right: 30px;
+                                    color: #000000;"></i>
+                                <span>@review.star</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-heart" style="margin-right: 30px;
+                                    color: #E91E63;"></i>
+                                <span>@review.hospitality</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-laugh-squint" style="margin-right: 30px;
+                                    color: #f44336;"></i>
+                                <span>@review.fun</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            }
+            </article>
+        </div>
     </div>
-  </div>
 }
