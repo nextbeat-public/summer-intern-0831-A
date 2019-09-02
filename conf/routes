@@ -15,16 +15,16 @@ GET  /facility/list                     controllers.facility.FacilityController.
 GET  /facility/search                   controllers.facility.FacilityController.search
 
 # --[ 一覧ページ ]----------------------------------------------------------------
-GET  /cast/list          controllers.cast.CastController.list
+GET  /cast/list                    controllers.cast.CastController.list
 GET  /cast/search                  controllers.cast.CastController.search
 
 # --[詳細ページ]----------------------------------------------------------------
 GET  /cast/detail/$castid<[0-9]+>               controllers.profile.ProfileDetailController.show(castid: Long)
 
 # --[ レビューページ ]----------------------------------------------------------------
-GET  /cast/detail/$castId<[0-9]+>/reviews               controllers.review.ReviewController.list(castId: Long)
-GET  /review/post                       controllers.review.ReviewCommitController.viewForReview
-POST /review/post                       controllers.review.ReviewCommitController.post
+GET  /cast/detail/$castId<[0-9]+>/review/list           controllers.review.ReviewController.list(castId: Long)
+GET  /cast/detail/$castId<[0-9]+>/review/post           controllers.review.ReviewCommitController.viewForReview(castId: Long)
+POST /cast/detail/$castId<[0-9]+>/review/post           controllers.review.ReviewCommitController.post(castId: Long)
 
 # --[ 特集ページ ]--------------------------------------------------------------
 GET  /recruit/intership-for-summer-21  controllers.recruit.InternshipForSummer21Controller.view
