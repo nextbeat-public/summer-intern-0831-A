@@ -18,11 +18,11 @@
     おもしろい人を
   </h2>
   <h1 class=" text-center mb-3" style="font-size: 100px">探す!</h1>
-  <div class="justify-content-center mb-5" style="display: flex;">
+  <!-- <div class="justify-content-center mb-5" style="display: flex;">
     <input class="col-5" type="text" style="height: 6vw; border-radius: 15px; border: #f4d100 solid 2px;">
   </div>
-
-  <!-- @** --[ 検索フォーム ]---------------------------------------------------------- *@
+ -->
+  @** --[ 検索フォーム ]---------------------------------------------------------- *@
   <div class="content__section form">
     @helper.form(action = controllers.cast.routes.CastController.search) {
 
@@ -31,25 +31,27 @@
         @helper.select(
           field   = form("locationId"),
           options = vv.location.map(v => (v.id, v.namePref)),
-          '_label           -> "都道府県",
-          '_default         -> "未選択",
-          '_showConstraints -> false
+          '_label           -> "",
+          '_default         -> "都道府県を選択してください",
+          '_showConstraints -> false,
+          '_class -> "test"
         )
       </div>
 
       @** 登録ボタン *@
-      <div class="form__section submit inline">
-        <button class="button" type="submit">
+      <div class="form__section submit inline text-center mb-5">
+        <button class="button" type="submit" style="background-color: #f4d100; width: 15%; font-size: 30px; margin: 0 auto; border-radius: 15px; height: 60px;">
           <span class="submit__text">検索</span>
         </button>
       </div>
     }
-  </div> -->
+  </div>
 
   @** --[ 一覧 ]-------------------------------------------------------- *@
   <div class="content__section content" style="margin: 0 80px;">
     @for(pair <- vv.pairs) {
       <article class="facility-list-item mb-5" style="display: flex;border-radius: 15px; background-color: #f4d100;">
+        <a href="/cast/detail/@pair.cast.id" style="color: #010101;text-decoration: none; width: 100%;">
         <div class="col-12">
           <div style="display: flex;">
             <div class="name col-3" style="font-size: 40px;">
@@ -70,32 +72,35 @@
               </div>
             </div>
             <div class="col-4">
-              <div class="mt-4 mb-3">
-                <i class="fas fa-star fa-2x" style="color: black;"></i>
-                <i class="fas fa-star fa-2x" style="color: black;"></i>
-                <i class="fas fa-star fa-2x" style="color: black;"></i>
-                <i class="fas fa-star fa-2x" style="color: black;"></i>
-                <i class="fas fa-star fa-2x" style="color: darkgray;"></i>
+              <div class="mt-2" style="display: flex;">
+                <p style="margin: 0"><i class="fas fa-star fa-2x" style="font-size: 40px; color: black; padding-top: 10px;"></i><p style="font-size: 40px; margin: 0;">&nbsp;:@pair.avereview._1</p></p>
               </div>
-              <div class="mt-4 mb-3">
-                <i class="fas fa-heart fa-2x" style="color: deeppink;"></i>
-                <i class="fas fa-heart fa-2x" style="color: deeppink;"></i>
-                <i class="fas fa-heart fa-2x" style="color: deeppink;"></i>
-                <i class="fas fa-heart fa-2x" style="color: darkgray;"></i>
-                <i class="fas fa-heart fa-2x" style="color: darkgray;"></i>
+              <div class="mt-2" style="display: flex;">
+                <p style="margin: 0"><i class="fas fa-heart fa-2x" style="font-size: 40px; color: deeppink; padding-top: 10px;"></i><p style="font-size: 40px; margin: 0;">&nbsp;:@pair.avereview._2</p></p>
               </div>
-              <div class="mt-4 mb-3">
-                <i class="fas fa-laugh-squint fa-2x" style="color: darkorange;"></i>
-                <i class="fas fa-laugh-squint fa-2x" style="color: darkorange;"></i>
-                <i class="fas fa-laugh-squint fa-2x" style="color: darkorange;"></i>
-                <i class="fas fa-laugh-squint fa-2x" style="color: darkorange;"></i>
-                <i class="fas fa-laugh-squint fa-2x" style="color: darkgray;"></i>
+              <div class="mt-2" style="display: flex;">
+                <p style="margin: 0"><i class="fas fa-laugh-squint fa-2x" style="font-size: 40px; color: darkorange; padding-top: 10px;"></i><p style="font-size: 40px; margin: 0;">&nbsp;:@pair.avereview._3</p></p>
               </div>
             </div>
           </div>
         </div>
+        </a>
       </article>
-    
     }
   </div>
+
+  <style>
+    .test dd {
+      text-align:  center;
+    }
+
+    .test dd select {
+      width: 70%;
+      height: 80px;
+      border: 2px solid #f4d100;
+      font-size: 25px;
+      background: white;
+      border-radius: 15px;
+    }
+  </style>
 }
