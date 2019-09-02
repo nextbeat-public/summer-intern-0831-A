@@ -11,7 +11,8 @@ import java.time.LocalDateTime
 
 case class SiteViewValueReview(
     layout: ViewValuePageLayout,
-    form:   Form[ReviewForm]
+    form:   Form[ReviewForm],
+    castId: Long,
 )
 
 object SiteViewValueReview {
@@ -23,8 +24,8 @@ object SiteViewValueReview {
         fun:            Double,
         hospitality:    Double,
     ){
-        def toReview =
-            Review(None, 1, 1, title, body, star, fun, hospitality, LocalDateTime.now())
+        def toReview(castId: Long) =
+            Review(None, castId, 1, title, body, star, fun, hospitality, LocalDateTime.now())
     }
 
     val formReview = Form(
