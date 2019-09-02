@@ -47,7 +47,7 @@
     @for(pair <- vv.pairs) {
      
       <article class="facility-list-item">
-        <a href="#">
+        <a href="../cast/detail/1" id="castLink" >
           <div class="item-panel__wrapper">
             <header class="facility-item__header">
               <div class="name">
@@ -66,7 +66,10 @@
                   <div class="description">
                     <label class="inline">備考:</label>
                     <p class="inline">
-                      @pair.store.address
+                      @for(review <- pair.review){
+                        @review.body
+                        @review.star
+                      }
                     </p>
                   </div>
                 </div>
