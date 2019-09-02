@@ -34,7 +34,7 @@ object SiteViewValueProfileList {
   case class Pair(
     store: Store,
     cast: Cast,
-    review: Seq[Review]
+    avereview: (Double, Double, Double)
   )
 
   def from(
@@ -45,13 +45,23 @@ object SiteViewValueProfileList {
     profile: Seq[Profile],
     review:  Seq[Review]
   ) = {
+
+ 
     val pairs = 
       for {
         c <- cast
         p <- profile.find(v => c.id.contains(v.user_id))
         s <- store.find(_.id.contains(p.store_id))
-      } yield Pair(s, c, review)
+        r =  review.filter(v => c.id.contains(v.castId))
+      } yield {
+        val starAve = r.map(_.star).sum / r.length
+        val funAve = r.map(_.fun).sum /r.length
+        val hospitalityAve = r.map(_.hospitality).sum / r.length
 
+        val avereview = (starAve, funAve, hospitalityAve)
+
+        Pair(s, c, avereview)
+      }
     new SiteViewValueProfileList(
       layout, location, store, cast, pairs
     )
