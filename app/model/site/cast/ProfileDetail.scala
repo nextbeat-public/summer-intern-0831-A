@@ -18,7 +18,8 @@ import persistence.review.model.Review
 //~~~~~~~~~~~~~~~~~~~~~
 case class SiteViewValueProfileDetail(
   layout:   ViewValuePageLayout,
-  profile: Profile
+  profile: Profile,
+  cast:   Cast
 )
 
 case class SiteViewValueProfileList(
