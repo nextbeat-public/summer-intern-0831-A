@@ -45,12 +45,13 @@
   @** --[ 一覧 ]-------------------------------------------------------- *@
   <div class="content__section content">
     @for(store <- vv.store) {
+      @for(cast <- vv.cast) {
       <article class="facility-list-item">
         <a href="#">
           <div class="item-panel__wrapper">
             <header class="facility-item__header">
               <div class="name">
-                @store.name
+                @cast.name
               </div>
             </header>
             <section class="facility-item__content">
@@ -74,6 +75,7 @@
           </div>
         </a>
       </article>
+    }
     }
   </div>
 }
