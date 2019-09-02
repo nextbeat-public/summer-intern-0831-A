@@ -24,5 +24,33 @@ case class SiteViewValueProfileList(
   layout:   ViewValuePageLayout,
   location: Seq[Location],
   store: Seq[Store],
-  cast:  Seq[Cast]
+  cast:  Seq[Cast],
+  pairs: Seq[SiteViewValueProfileList.Pair]
 )
+
+object SiteViewValueProfileList {
+
+  case class Pair(
+    store: Store,
+    cast: Cast
+  )
+
+  def from(
+    layout:   ViewValuePageLayout,
+    location: Seq[Location],
+    store:  Seq[Store],
+    cast:   Seq[Cast],
+    profile: Seq[Profile]
+  ) = {
+    val pairs = 
+      for {
+        c <- cast
+        p <- profile.find(v => c.id.contains(v.user_id))
+        s <- store.find(_.id.contains(p.store_id))
+      } yield Pair(s, c)
+
+    new SiteViewValueProfileList(
+      layout, location, store, cast, pairs
+    )
+  }
+}
