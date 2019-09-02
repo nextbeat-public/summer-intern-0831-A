@@ -59,7 +59,7 @@ class NewUserCommitController @Inject()(
           id <- daoUser.add(form.toUser(imageData))
           _ <- daoUserPassword.add(form.toUserPassword(id))
         } yield {
-          Redirect("/recruit/intership-for-summer-21")
+          Redirect("/login")
             .withSession(
               request.session + ("user_id" -> id.toString)
             )
