@@ -42,13 +42,14 @@ class CastController @javax.inject.Inject()(
       locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_ALL)
       storeSeq     <- storeDao.findAll
       castSeq     <- castDao.findAll
-
+      profileSeq     <- profileDao.findByStoreId(storeSeq.flatMap(_.id))
     } yield {
-      val vv = SiteViewValueProfileList(
+      val vv = SiteViewValueProfileList.from(
         layout     = ViewValuePageLayout(id = request.uri),
         location   = locSeq,
         store       = storeSeq,
-        cast        = castSeq
+        cast        = castSeq,
+        profile    = profileSeq
       )
       Ok(views.html.site.cast.list.Main(vv, formForStoreSearch))
     }
@@ -64,12 +65,14 @@ class CastController @javax.inject.Inject()(
           locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_ALL)
           storeSeq     <- storeDao.findAll
           castSeq        <- castDao.findAll
+          profileSeq     <- profileDao.findByStoreId(storeSeq.flatMap(_.id))
         } yield {
-          val vv = SiteViewValueProfileList(
+          val vv = SiteViewValueProfileList.from(
             layout     = ViewValuePageLayout(id = request.uri),
             location   = locSeq,
             store       = storeSeq,
-            cast       = castSeq
+            cast       = castSeq,
+            profile    = profileSeq
           )
           BadRequest(views.html.site.cast.list.Main(vv, errors))
         }
@@ -88,11 +91,12 @@ class CastController @javax.inject.Inject()(
           profileSeq     <- profileDao.findByStoreId(storeSeq.flatMap(_.id))
           castSeq      <- castDao.findByUserId(profileSeq.map(_.user_id))
         } yield {
-          val vv = SiteViewValueProfileList(
+          val vv = SiteViewValueProfileList.from(
            layout     = ViewValuePageLayout(id = request.uri),
             location   = locSeq,
             store       = storeSeq,
-            cast       = castSeq
+            cast       = castSeq,
+            profile    = profileSeq
           )
           Ok(views.html.site.cast.list.Main(vv, formForStoreSearch.fill(form)))
         }
