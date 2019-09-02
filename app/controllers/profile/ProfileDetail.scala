@@ -12,6 +12,7 @@ import play.api.mvc.{AbstractController, MessagesControllerComponents}
 import model.component.util.ViewValuePageLayout
 import mvc.action.AuthenticationAction
 import persistence.profile.dao.ProfileDAO
+import persistence.cast.dao.CastDAO
 import persistence.profile.model.Profile
 import model.site.cast.SiteViewValueProfileDetail
 
@@ -19,6 +20,7 @@ import model.site.cast.SiteViewValueProfileDetail
 //~~~~~~~~~~~~~~~~~~~~~
 class ProfileDetailController @javax.inject.Inject()(
   val profileDao: ProfileDAO,
+  val castDao: CastDAO,
   cc: MessagesControllerComponents
 ) extends AbstractController(cc) with I18nSupport {
   implicit lazy val executionContext = defaultExecutionContext
@@ -29,12 +31,14 @@ class ProfileDetailController @javax.inject.Inject()(
    def show(castid: Long)= (Action andThen AuthenticationAction()).async { implicit request =>
     for {
       Some(profileDetail) <- profileDao.get(castid)
+      Some(castDetail) <- castDao.get(castid)
     } yield {
       val vv = SiteViewValueProfileDetail(
         layout     = ViewValuePageLayout(id = request.uri),
-        profile    = profileDetail
+        profile    = profileDetail,
+        cast = castDetail
       )
-    Ok(views.html.site.cast.detail.Main(vv))
+      Ok(views.html.site.cast.detail.Main(vv))
     }
   }
 }
