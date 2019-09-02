@@ -11,6 +11,7 @@ import model.component.util.ViewValuePageLayout
 import persistence.geo.model.Location
 import persistence.profile.model.Profile
 import persistence.store.model.Store
+import persistence.cast.model.Cast
 
 // 表示: 施設一覧
 //~~~~~~~~~~~~~~~~~~~~~
@@ -22,5 +23,6 @@ case class SiteViewValueProfileDetail(
 case class SiteViewValueProfileList(
   layout:   ViewValuePageLayout,
   location: Seq[Location],
-  store: Seq[Store]
+  store: Seq[Store],
+  cast:  Seq[Cast]
 )
