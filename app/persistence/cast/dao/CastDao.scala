@@ -15,6 +15,7 @@ import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
 import persistence.cast.model.Cast
 import persistence.geo.model.Location
+import persistence.profile.model.Profile
 
 // DAO: 施設情報
 //~~~~~~~~~~~~~~~~~~
@@ -35,6 +36,13 @@ class CastDAO @javax.inject.Inject()(
       slick
         .filter(_.id === id)
         .result.headOption
+    }
+
+  def findByUserId(ids: Seq[Profile.UserId]): Future[Seq[Cast]] =
+    db.run {
+      slick
+        .filter(_.id inSet ids)
+        .result
     }
 
   /**
