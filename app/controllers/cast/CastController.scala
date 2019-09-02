@@ -28,7 +28,7 @@ import persistence.store.dao.StoreDAO
 class CastController @javax.inject.Inject()(
   val castDao: CastDAO,
   val daoLocation: LocationDAO,
-  // val profileDao: ProfileDao,
+  val profileDao: ProfileDAO,
   val storeDao: StoreDAO,
   cc: MessagesControllerComponents
 ) extends AbstractController(cc) with I18nSupport {
@@ -41,12 +41,14 @@ class CastController @javax.inject.Inject()(
     for {
       locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_ALL)
       storeSeq     <- storeDao.findAll
+      castSeq     <- castDao.findAll
 
     } yield {
       val vv = SiteViewValueProfileList(
         layout     = ViewValuePageLayout(id = request.uri),
         location   = locSeq,
-        store       = storeSeq
+        store       = storeSeq,
+        cast        = castSeq
       )
       Ok(views.html.site.cast.list.Main(vv, formForStoreSearch))
     }
@@ -61,11 +63,13 @@ class CastController @javax.inject.Inject()(
        for {
           locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_ALL)
           storeSeq     <- storeDao.findAll
+          castSeq        <- castDao.findAll
         } yield {
           val vv = SiteViewValueProfileList(
             layout     = ViewValuePageLayout(id = request.uri),
             location   = locSeq,
-            store       = storeSeq
+            store       = storeSeq,
+            cast       = castSeq
           )
           BadRequest(views.html.site.cast.list.Main(vv, errors))
         }
@@ -81,11 +85,14 @@ class CastController @javax.inject.Inject()(
               } yield storeSeq
             case None     => storeDao.findAll
           }
+          profileSeq     <- profileDao.findByStoreId(storeSeq.flatMap(_.id))
+          castSeq      <- castDao.findByUserId(profileSeq.map(_.user_id))
         } yield {
           val vv = SiteViewValueProfileList(
-            layout     = ViewValuePageLayout(id = request.uri),
+           layout     = ViewValuePageLayout(id = request.uri),
             location   = locSeq,
-            store       = storeSeq
+            store       = storeSeq,
+            cast       = castSeq
           )
           Ok(views.html.site.cast.list.Main(vv, formForStoreSearch.fill(form)))
         }
