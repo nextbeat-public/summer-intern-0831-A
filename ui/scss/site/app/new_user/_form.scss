@@ -15,11 +15,8 @@
   //-- [ 要素定義 ] ------------------------------------------------------------
   //- 見出し
   .content__section.header {
-    padding:    $space-size-medium;
-    background: map-get($mat-grey, 100);
-    text-align: center;
     .header__title {
-      font-size:   $font-size-medium;
+      font-size:   $font-size-2xlarge;
       font-weight: bold;
     }
   }
