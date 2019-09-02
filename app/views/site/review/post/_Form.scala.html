@@ -18,7 +18,7 @@
     </h3>
     @** --[ フォーム ]-------------------------------------------------------- *@
     <div class="content__section form">
-    @helper.form(action = controllers.review.routes.ReviewCommitController.post(), 'enctype -> "multipart/form-data") {
+    @helper.form(action = controllers.review.routes.ReviewCommitController.post(vv.castId), 'enctype -> "multipart/form-data") {
         @** タイトル *@
         <div class="form__section name-container">
             @helper.inputText(

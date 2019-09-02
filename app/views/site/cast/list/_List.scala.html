@@ -14,11 +14,15 @@
 @** 施設検索一覧 *@
 @views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
   @** --[ 見出し ]---------------------------------------------------------- *@
-  <h3 class="content__section header">
-    <span class="header__title">施設一覧</span>
-  </h3>
+  <h2 class="content__section header text-center mt-5" style="font-size: 50px">
+    おもしろい人を
+  </h2>
+  <h1 class=" text-center mb-3" style="font-size: 100px">探す!</h1>
+  <div class="justify-content-center mb-5" style="display: flex;">
+    <input class="col-5" type="text" style="height: 6vw; border-radius: 15px; border: #f4d100 solid 2px;">
+  </div>
 
-  @** --[ 検索フォーム ]---------------------------------------------------------- *@
+  <!-- @** --[ 検索フォーム ]---------------------------------------------------------- *@
   <div class="content__section form">
     @helper.form(action = controllers.cast.routes.CastController.search) {
 
@@ -40,18 +44,21 @@
         </button>
       </div>
     }
-  </div>
+  </div> -->
 
   @** --[ 一覧 ]-------------------------------------------------------- *@
-  <div class="content__section content">
+  <div class="content__section content" style="margin: 0 80px;">
     @for(pair <- vv.pairs) {
-     
-      <article class="facility-list-item">
-        <a href="../cast/detail/1" id="castLink" >
-          <div class="item-panel__wrapper">
-            <header class="facility-item__header">
-              <div class="name">
-                @pair.cast.name
+      <article class="facility-list-item mb-5" style="display: flex;border-radius: 15px; background-color: #f4d100;">
+        <div class="col-12">
+          <div style="display: flex;">
+            <div class="name col-3" style="font-size: 40px;">
+              <img src="https://s3-ap-northeast-1.amazonaws.com/www.nextbeat.co.jp/wp-content/uploads/2019/01/30160727/kawai_1.png" alt=""/ style="width: 170px; height: 170px; margin: 10px;">
+              
+            </div>
+            <div class="col-5 text-center">
+              <div style="font-size: 50px;">
+                @pair.cast.name さん
               </div>
             </header>
             <section class="facility-item__content">
@@ -70,10 +77,40 @@
                     </p>
                   </div>
                 </div>
+              <div class="item-panel__content">
+                <div class="address">
+                  <p class="inline" style="font-size: 40px; margin: 0">
+                    @pair.store.name
+                  </p>
+                  <p style="font-size: 40px; margin: 0;">10:00-14:00</p>
+                </div>
               </div>
-            </section>
+            </div>
+            <div class="col-4">
+              <div class="mt-4 mb-3">
+                <i class="fas fa-star fa-2x" style="color: black;"></i>
+                <i class="fas fa-star fa-2x" style="color: black;"></i>
+                <i class="fas fa-star fa-2x" style="color: black;"></i>
+                <i class="fas fa-star fa-2x" style="color: black;"></i>
+                <i class="fas fa-star fa-2x" style="color: darkgray;"></i>
+              </div>
+              <div class="mt-4 mb-3">
+                <i class="fas fa-heart fa-2x" style="color: deeppink;"></i>
+                <i class="fas fa-heart fa-2x" style="color: deeppink;"></i>
+                <i class="fas fa-heart fa-2x" style="color: deeppink;"></i>
+                <i class="fas fa-heart fa-2x" style="color: darkgray;"></i>
+                <i class="fas fa-heart fa-2x" style="color: darkgray;"></i>
+              </div>
+              <div class="mt-4 mb-3">
+                <i class="fas fa-laugh-squint fa-2x" style="color: darkorange;"></i>
+                <i class="fas fa-laugh-squint fa-2x" style="color: darkorange;"></i>
+                <i class="fas fa-laugh-squint fa-2x" style="color: darkorange;"></i>
+                <i class="fas fa-laugh-squint fa-2x" style="color: darkorange;"></i>
+                <i class="fas fa-laugh-squint fa-2x" style="color: darkgray;"></i>
+              </div>
+            </div>
           </div>
-        </a>
+        </div>
       </article>
     
     }
