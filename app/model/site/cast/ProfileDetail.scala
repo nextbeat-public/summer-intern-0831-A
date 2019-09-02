@@ -12,6 +12,7 @@ import persistence.geo.model.Location
 import persistence.profile.model.Profile
 import persistence.store.model.Store
 import persistence.cast.model.Cast
+import persistence.review.model.Review
 
 // 表示: 施設一覧
 //~~~~~~~~~~~~~~~~~~~~~
@@ -32,7 +33,8 @@ object SiteViewValueProfileList {
 
   case class Pair(
     store: Store,
-    cast: Cast
+    cast: Cast,
+    review: Seq[Review]
   )
 
   def from(
@@ -40,14 +42,15 @@ object SiteViewValueProfileList {
     location: Seq[Location],
     store:  Seq[Store],
     cast:   Seq[Cast],
-    profile: Seq[Profile]
+    profile: Seq[Profile],
+    review:  Seq[Review]
   ) = {
     val pairs = 
       for {
         c <- cast
         p <- profile.find(v => c.id.contains(v.user_id))
         s <- store.find(_.id.contains(p.store_id))
-      } yield Pair(s, c)
+      } yield Pair(s, c, review)
 
     new SiteViewValueProfileList(
       layout, location, store, cast, pairs
