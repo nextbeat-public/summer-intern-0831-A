@@ -1,54 +1,76 @@
 @*
- * This file is part of the Nextbeat services.
- *
- * For the full copyright and license information,
- * please view the LICENSE file that was distributed with this source code.
- *@
+* This file is part of the Nextbeat services.
+*
+* For the full copyright and license information,
+* please view the LICENSE file that was distributed with this source code.
+*@
 @import views.html.helper
 @import model.site.cast.SiteViewValueProfileDetail
 @import play.api.data.Form
 
 @import persistence.profile.model.Profile
 @(vv: SiteViewValueProfileDetail)(implicit messages: play.api.i18n.Messages)
-
 @** 施設検索一覧 *@
 @views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
-  @** --[ 見出し ]---------------------------------------------------------- *@
-  <h3 class="content__section header">
-    <span class="header__title">詳細表示</span>
-  </h3>
-
-  @** --[ 表示 ]-------------------------------------------------------- *@
-  <div class="content__section content">
-    
-      <article class="facility-list-item">
-        <a href="#">
-          <div class="item-panel__wrapper">
-            <header class="facility-item__header">
-              <div class="name">
-                @vv.profile.id
-              </div>
-            </header>
-            <section class="facility-item__content">
-              <div>
-                <div class="item-panel__content">
-                  <div class="address">
-                    <label class="inline">コメント:</label>
-                    <p class="inline">
-                      @vv.profile.comment
-                    </p>
-                  </div>
-                  <div class="description">
-                    <label class="inline">備考:</label>
-                    <p class="inline">
-                      @vv.profile.description
-                    </p>
-                  </div>
+    @** --[ 表示 ]-------------------------------------------------------- *@
+    <div style="font-size: 52px;">
+        <div class="content__section content">
+            <div style="position: relative">
+                <img src="/assets/images/site/recruit/internship_for_summer_21/03_mentor-utsunomiya@@2x.png" style="width: 100%;
+                    height: 650px;
+                    object-fit: cover">
+                <div style="background-color: rgba(0, 0, 0, 0.5);
+                    color: white;
+                    width: 100%;
+                    height: 150px;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                ">
+                    <span>@vv.cast.name </span><br>
+                    <span>@vv.profile.comment </span>
                 </div>
-              </div>
-            </section>
-          </div>
-        </a>
-      </article>
-  </div>
+            </div>
+
+            <article class="facility-list-item" style="display: flex;
+                flex-direction: column;
+                padding: 10px 20px  ;">
+                <div style="padding: 30px 0;">
+                    <span style="font-size: 64px;
+                        font-weight: bold">@vv.cast.name</span>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-warning" style="width: 50%;
+                        height: 90px;
+                        font-size: 52px;"> <a href="/cast/detail/1/review/post" style="text-decoration: none;
+                        color: #000;">
+                        おもしろい！</a></button>
+                </div>
+                <div style="margin: 40px 0;">
+                    <div style="font-size: 42px;
+                        padding: 10px 0;">紹介文</div>
+                    <div>
+                    @vv.profile.description
+                    </div>
+                </div>
+                <div style="margin: 40px 0;">
+                    <div>
+                        <i class="fas fa-star" style="margin-right: 30px;
+                            color: #000000;"></i>
+                        <span>3.0</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-heart" style="margin-right: 30px;
+                            color: #E91E63;"></i>
+                        <span>4.0</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-laugh-squint" style="margin-right: 30px;
+                            color: #f44336;"></i>
+                        <span>2.5</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
 }
