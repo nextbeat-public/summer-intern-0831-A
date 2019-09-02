@@ -31,16 +31,19 @@ class ReviewDAO @javax.inject.Inject()(
       .filter(_.castId === castId)
         .result
     }
-
-  /**
-   * 地域から施設を取得
-   * 検索業件: ロケーションID
-   */
+  
+  def post(data: Review): Future[Review.Id] =
+    db.run {
+      data.id match {
+        case None    => slick returning slick.map(_.id) += data
+        case Some(_) => DBIO.failed(
+          new IllegalArgumentException("The given object is already assigned id.")
+        )
+      }
+    }
 
   // --[ テーブル定義 ] --------------------------------------------------------
   class ReviewTable(tag: Tag) extends Table[Review](tag, "review") {
-
-
     // Table's columns
     /* @1 */ def id            = column[Review.Id]      ("id", O.PrimaryKey, O.AutoInc)
     /* @2 */ def castId        = column[Long]           ("cast_id")
