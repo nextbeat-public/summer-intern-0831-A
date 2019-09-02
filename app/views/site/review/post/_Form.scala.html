@@ -13,18 +13,16 @@
 @** ユーザー登録フォーム *@
 @views.html.common.layout.InnerContent("site-review-post-form", "content") {
     @** --[ 見出し ]---------------------------------------------------------- *@
-    <h3 class="content__section header">
-        <span class="header__title">みんなの声投稿</span>
-    </h3>
+    <h1 class=" text-center mt-5 mb-3" style="font-size: 100px">みんなの声投稿</h1>
     @** --[ フォーム ]-------------------------------------------------------- *@
     <div class="content__section form">
     @helper.form(action = controllers.review.routes.ReviewCommitController.post(vv.castId), 'enctype -> "multipart/form-data") {
-        @** タイトル *@
-        <div class="form__section name-container">
+        <div class="form__section name-container mt-5">
             @helper.inputText(
                 vv.form("title"),
                 '_label -> "タイトル",
-                '_showConstraints -> false
+                '_showConstraints -> false,
+                '_class -> "review_title"
             )
         </div>
         @** コメント *@
@@ -33,6 +31,7 @@
                 vv.form("body"),
                 '_label -> "コメント",
                 '_showConstraints -> false,
+                '_class -> "review_input"
             )
         </div>
 
@@ -42,6 +41,7 @@
                 vv.form("hospitality"),
                 '_label -> "親切さ",
                 '_showConstraints -> false,
+                '_class -> "rate_title"
             )
         </div>
 
@@ -52,6 +52,7 @@
                 vv.form("fun"),
                 '_label -> "面白さ",
                 '_showConstraints -> false,
+                '_class -> "rate_title"
             )
         </div>
 
@@ -61,15 +62,78 @@
                 vv.form("star"),
                 '_label -> "総合点",
                 '_showConstraints -> false,
+                '_class -> "review_title"
             )
         </div>
 
         @** 登録ボタン *@
-        <div class="form__section submit">
+        <div class="form__section submit mt-5 text-center" style="background-color: #f4d100; width: 50%; font-size: 50px; margin: 0 auto; border-radius: 15px; height: 100px; padding-top: 10px;">
             <button class="button button-stroked" type="submit">
                 <span class="submit__text">レビュー投稿</span>
             </button>
         </div＞
     }
     </div>
+
+    <style>
+    .review_title dt {
+        text-align: center;
+    }
+
+    .review_title dd {
+        text-align: center;
+    }
+
+    .review_title dt label {
+      font-size: 60px;
+    }
+
+    .review_title dd input {
+      width: 70%;
+      height: 80px;
+      font-size: 40px;
+      border-radius: 15px;
+      border: 3px #f4d100 solid;
+    }
+
+    .review_input dt {
+        text-align: center;
+    }
+
+    .review_input dd {
+        text-align: center;
+    }
+
+    .review_input dt label {
+      font-size: 60px;
+    }
+
+    .review_input dd input {
+      width: 70%;
+      height:200px;
+      font-size: 40px;
+      border-radius: 15px;
+      border: 3px #f4d100 solid;
+    }
+
+    .rate_title dt {
+        text-align: center;
+    }
+
+    .rate_title dd {
+        text-align: center;
+    }
+
+    .rate_title dt label {
+      font-size: 60px;
+    }
+
+    .rate_title dd input {
+      width: 70%;
+      height: 80px;
+      font-size: 40px;
+      border-radius: 15px;
+      border: 3px #f4d100 solid;
+    }
+    </style>
 }
