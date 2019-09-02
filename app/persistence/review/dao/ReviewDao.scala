@@ -14,6 +14,7 @@ import slick.jdbc.JdbcProfile
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
 import persistence.review.model.Review
+import persistence.cast.model.Cast
 
 // DAO: 施設情報
 //~~~~~~~~~~~~~~~~~~
@@ -30,6 +31,13 @@ class ReviewDAO @javax.inject.Inject()(
       slick
       .filter(_.castId === castId)
         .result
+    }
+  
+  def findByCastId(castIds: Seq[Long]) : Future[Seq[Review]] =
+    db.run {
+      slick
+      .filter(_.castId inSet castIds)
+      .result
     }
   
   def post(data: Review): Future[Review.Id] =
