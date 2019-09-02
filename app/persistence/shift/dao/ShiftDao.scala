@@ -18,7 +18,7 @@ class ShiftDAO @javax.inject.Inject()(
   // --[ リソース定義 ] --------------------------------------------------------
   lazy val slick = TableQuery[ShiftTable]
 
-  def filterByCastId(castId: Long) : Future[Shift] =
+  def filterByCastId(castId: Long) : Future[Seq[Shift]] =
     db.run {
       slick
       .filter(_.castId === castId)
