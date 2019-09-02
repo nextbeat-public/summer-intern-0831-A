@@ -14,8 +14,12 @@ class ReviewCommitController @javax.inject.Inject()(
     ) extends AbstractController(cc) with I18nSupport {
         implicit lazy val executionContext = defaultExecutionContext
 
-    def viewForReview = Action.async {implict request =>
-        for
+    def viewForReview = Action.async {implicit request =>
+      val vv = SiteViewValueReview(
+            layout = ViewValuePageLayout(id = request.uri),
+            form = SiteViewValueReview.formReview
+        )
+        Future.successful(Ok(views.html.site.review.post.Main(vv)))
     }
 
     def post = (Action andThen AuthenticationAction()).async { implicit request =>
