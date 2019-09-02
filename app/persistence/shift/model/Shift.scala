@@ -7,19 +7,15 @@ import java.time.LocalDateTime
 // 施設情報 (sample)
 //~~~~~~~~~~~~~
 case class Shift(
-  id:          Option[Review.Id],                // 施設ID
-  castId:      Long,
-  userId:      Long,
-  title:       String,
-  body:        String,
-  star:        Double,
-  fun:         Double,
-  hospitality: Double,
-  createdAt:   LocalDateTime = LocalDateTime.now   // データ作成日
+  id:           Option[Shift.Id],                // 施設ID
+  day_of_week:  String,
+  start_time:   LocalDateTime,
+  end_time:     LocalDateTime,
+  cast_id:      Long,
 )
 
 // コンパニオンオブジェクト
 //~~~~~~~~~~~~~~~~~~~~~~~~~~
-object Review {
+object Shift {
   type Id = Long
 }

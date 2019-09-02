@@ -10,52 +10,36 @@ import persistence.shift.model.Shift
 
 // DAO: 施設情報
 //~~~~~~~~~~~~~~~~~~
-class ReviewDAO @javax.inject.Inject()(
+class ShiftDAO @javax.inject.Inject()(
   val dbConfigProvider: DatabaseConfigProvider
 ) extends HasDatabaseConfigProvider[JdbcProfile] {
   import profile.api._
 
   // --[ リソース定義 ] --------------------------------------------------------
-  lazy val slick = TableQuery[ReviewTable]
+  lazy val slick = TableQuery[ShiftTable]
 
-  def filterByCastId(castId: Long) : Future[Seq[Review]] =
+  def filterByCastId(castId: Long) : Future[Shift] =
     db.run {
       slick
       .filter(_.castId === castId)
         .result
     }
-  
-  def post(data: Review): Future[Review.Id] =
-    db.run {
-      data.id match {
-        case None    => slick returning slick.map(_.id) += data
-        case Some(_) => DBIO.failed(
-          new IllegalArgumentException("The given object is already assigned id.")
-        )
-      }
-    }
-
   // --[ テーブル定義 ] --------------------------------------------------------
-  class ReviewTable(tag: Tag) extends Table[Review](tag, "review") {
+  class ShiftTable(tag: Tag) extends Table[Shift](tag, "shift") {
     // Table's columns
-    /* @1 */ def id            = column[Review.Id]      ("id", O.PrimaryKey, O.AutoInc)
-    /* @2 */ def castId        = column[Long]           ("cast_id")
-    /* @3 */ def userId        = column[Long]           ("user_id")
-    /* @6 */ def title         = column[String]           ("title")
-             def body          = column[String]         ("body")
-             def star          = column[Double]         ("star")
-             def fun           = column[Double]         ("fun")
-             def hospitality   = column[Double]         ("hospitality")
-             def createdAt     = column[LocalDateTime]  ("created_at")
+    /* @1 */ def id            = column[Shift.Id]       ("id", O.PrimaryKey, O.AutoInc)
+    /* @2 */ def day_of_week   = column[String]         ("day_of_week")
+             def start_time    = column[LocalDateTime]  ("start_time")
+             def end_time      = column[LocalDateTime]  ("end_time")
 
     // The * projection of the table
     def * = (
-      id.?, castId, userId, title, body, star, fun, hospitality, createdAt
+      id.?, day_of_week, start_time, end_time
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
-      (Review.apply _).tupled,
+      (Shift.apply _).tupled,
       /** The bidirectional mappings : Model => Tuple(table) */
-      (v: TableElementType) => Review.unapply(v)
+      (v: TableElementType) => Shift.unapply(v)
       )
   }
 }
