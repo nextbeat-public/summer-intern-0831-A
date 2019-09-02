@@ -49,7 +49,6 @@
   @** --[ 一覧 ]-------------------------------------------------------- *@
   <div class="content__section content" style="margin: 0 80px;">
     @for(pair <- vv.pairs) {
-     
       <article class="facility-list-item mb-5" style="display: flex;border-radius: 15px; background-color: #f4d100;">
         <div class="col-12">
           <div style="display: flex;">
@@ -61,6 +60,23 @@
               <div style="font-size: 50px;">
                 @pair.cast.name さん
               </div>
+            </header>
+            <section class="facility-item__content">
+              <div>
+                <div class="item-panel__content">
+                  <div class="address">
+                    <label class="inline">住所:</label>
+                    <p class="inline">
+                      @pair.store.address
+                    </p>
+                  </div>
+                  <div class="description">
+                    <label class="inline">備考:</label>
+                    <p class="inline">
+                      @pair.avereview._1
+                    </p>
+                  </div>
+                </div>
               <div class="item-panel__content">
                 <div class="address">
                   <p class="inline" style="font-size: 40px; margin: 0">
@@ -68,12 +84,6 @@
                   </p>
                   <p style="font-size: 40px; margin: 0;">10:00-14:00</p>
                 </div>
-                <!-- <div class="description">
-                  <label class="inline">備考:</label>
-                  <p class="inline">
-                    @pair.store.address
-                  </p>
-                </div> -->
               </div>
             </div>
             <div class="col-4">

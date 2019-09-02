@@ -21,6 +21,8 @@ import persistence.profile.dao.ProfileDAO
 import persistence.profile.model.Profile
 import model.site.cast.SiteViewValueProfileDetail
 import persistence.store.dao.StoreDAO
+import persistence.review.dao.ReviewDAO
+
 
 
 // 施設
@@ -30,6 +32,7 @@ class CastController @javax.inject.Inject()(
   val daoLocation: LocationDAO,
   val profileDao: ProfileDAO,
   val storeDao: StoreDAO,
+  val reviewDao: ReviewDAO,
   cc: MessagesControllerComponents
 ) extends AbstractController(cc) with I18nSupport {
   implicit lazy val executionContext = defaultExecutionContext
@@ -43,13 +46,15 @@ class CastController @javax.inject.Inject()(
       storeSeq     <- storeDao.findAll
       castSeq     <- castDao.findAll
       profileSeq     <- profileDao.findByStoreId(storeSeq.flatMap(_.id))
+      reviewSeq    <- reviewDao.findByCastId(castSeq.flatMap(_.id))
     } yield {
       val vv = SiteViewValueProfileList.from(
         layout     = ViewValuePageLayout(id = request.uri),
         location   = locSeq,
         store       = storeSeq,
         cast        = castSeq,
-        profile    = profileSeq
+        profile    = profileSeq,
+        review    = reviewSeq
       )
       Ok(views.html.site.cast.list.Main(vv, formForStoreSearch))
     }
@@ -66,13 +71,15 @@ class CastController @javax.inject.Inject()(
           storeSeq     <- storeDao.findAll
           castSeq        <- castDao.findAll
           profileSeq     <- profileDao.findByStoreId(storeSeq.flatMap(_.id))
+          reviewSeq    <- reviewDao.findByCastId(castSeq.flatMap(_.id))
         } yield {
           val vv = SiteViewValueProfileList.from(
             layout     = ViewValuePageLayout(id = request.uri),
             location   = locSeq,
             store       = storeSeq,
             cast       = castSeq,
-            profile    = profileSeq
+            profile    = profileSeq,
+            review    = reviewSeq
           )
           BadRequest(views.html.site.cast.list.Main(vv, errors))
         }
@@ -90,13 +97,15 @@ class CastController @javax.inject.Inject()(
           }
           profileSeq     <- profileDao.findByStoreId(storeSeq.flatMap(_.id))
           castSeq      <- castDao.findByUserId(profileSeq.map(_.user_id))
+          reviewSeq    <- reviewDao.findByCastId(castSeq.flatMap(_.id))
         } yield {
           val vv = SiteViewValueProfileList.from(
            layout     = ViewValuePageLayout(id = request.uri),
             location   = locSeq,
             store       = storeSeq,
             cast       = castSeq,
-            profile    = profileSeq
+            profile    = profileSeq,
+            review    = reviewSeq
           )
           Ok(views.html.site.cast.list.Main(vv, formForStoreSearch.fill(form)))
         }
