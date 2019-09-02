@@ -8,10 +8,10 @@ import java.time.LocalDateTime
 //~~~~~~~~~~~~~
 case class Shift(
   id:           Option[Shift.Id],                // 施設ID
-  day_of_week:  String,
-  start_time:   LocalDateTime,
-  end_time:     LocalDateTime,
-  cast_id:      Long,
+  dayOfWeek:   String,
+  startTime:   LocalDateTime,
+  endTime:     LocalDateTime,
+  castId:      Long,
 )
 
 // コンパニオンオブジェクト

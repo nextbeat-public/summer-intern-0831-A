@@ -27,10 +27,11 @@ class ShiftDAO @javax.inject.Inject()(
   // --[ テーブル定義 ] --------------------------------------------------------
   class ShiftTable(tag: Tag) extends Table[Shift](tag, "shift") {
     // Table's columns
-    /* @1 */ def id            = column[Shift.Id]       ("id", O.PrimaryKey, O.AutoInc)
-    /* @2 */ def day_of_week   = column[String]         ("day_of_week")
-             def start_time    = column[LocalDateTime]  ("start_time")
-             def end_time      = column[LocalDateTime]  ("end_time")
+    /* @1 */ def id           = column[Shift.Id]       ("id", O.PrimaryKey, O.AutoInc)
+    /* @2 */ def dayOfWeek    = column[String]         ("day_of_week")
+             def startTime    = column[LocalDateTime]  ("start_time")
+             def endTime      = column[LocalDateTime]  ("end_time")
+             def castId       = column[Long]           ("cast_id")
 
     // The * projection of the table
     def * = (
