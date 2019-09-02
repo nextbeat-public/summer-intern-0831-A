@@ -13,6 +13,7 @@ case class SiteViewValueReview(
     layout: ViewValuePageLayout,
     form:   Form[ReviewForm],
     castId: Long,
+    userId: Long,
 )
 
 object SiteViewValueReview {
@@ -24,8 +25,8 @@ object SiteViewValueReview {
         fun:            Double,
         hospitality:    Double,
     ){
-        def toReview(castId: Long) =
-            Review(None, castId, 1, title, body, star, fun, hospitality, LocalDateTime.now())
+        def toReview(castId: Long, userId: Long) =
+            Review(None, castId, userId, title, body, star, fun, hospitality, LocalDateTime.now())
     }
 
     val formReview = Form(
