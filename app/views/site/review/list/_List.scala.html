@@ -12,30 +12,36 @@
 @** 施設検索一覧 *@
 @views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
     <div style="font-size: 42px;">
-        <div class="container">
+        <div class="">
             @** --[ 見出し ]---------------------------------------------------------- *@
             <p class="content__section" style="font-size: 52px;">
                 <span class="header__title">みんなの声</span>
             </p>
 
             @** --[ 一覧 ]-------------------------------------------------------- *@
-            <div class="">
+            <article class="content__section content" style="margin: 0 80px;">
             @for(review <- vv.reviews) {
-                <div class="facility-list-item card" style="background-color: #f4d100;">
-                    <div class="card-body" style="display: flex;
+                <article class="facility-list-item mb-5" style="display: flex;
+                    border-radius: 15px;
+                    background-color: #f4d100;">
+                    <div class="" style="display: flex;
                         align-items: center" >
-                        <div>
-                            <img src="https://lokeshdhakar.com/projects/lightbox2/images/image-4.jpg" width="120px" height="120px">
+                        <div class="name col-3" style="font-size: 40px;">
+                            <img src="https://s3-ap-northeast-1.amazonaws.com/www.nextbeat.co.jp/wp-content/uploads/2019/01/30160727/kawai_1.png" alt=""
+                            style="width: 170px;
+                                height: 170px;
+                                margin: 10px;">
+
                         </div>
                         <div class="item-panel__wrapper" style="padding: 0 50px;
-                            width: 500px;">
+                            width: 400px;">
                             <div>
                                 <span style="font-size: 64px;
                                     font-weight: bold;">
                                 @review.title
                                 </span>
                             </div>
-                            <div>
+                            <div style="word-break: break-all;">
                                 <span>
                                 @review.body
                                 </span>
@@ -43,22 +49,22 @@
                         </div>
                         <div>
                             <div>
-                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star">star: </i>
                                 <span>@review.star</span>
                             </div>
                             <div>
-                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart">heart: </i>
                                 <span>@review.hospitality</span>
                             </div>
                             <div>
-                                <i class="fas fa-laugh-squint"></i>
+                                <i class="fas fa-laugh-squint">laugh: </i>
                                 <span>@review.fun</span>
                             </div>
                         </div>
                     </div>
-                </div>
+                </article>
             }
-            </div>
+            </article>
         </div>
     </div>
 }
