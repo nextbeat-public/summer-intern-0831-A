@@ -11,26 +11,31 @@
 @(vv: SiteViewValueReviewList)(implicit messages: play.api.i18n.Messages)
 @** 施設検索一覧 *@
 @views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
-    <div>
-        @** --[ 見出し ]---------------------------------------------------------- *@
-        @*<h3 class="content__section header">*@
-        @*<span class="header__title">みんなの声</span>*@
-        @*</h3>*@
-
-        @** --[ 一覧 ]-------------------------------------------------------- *@
-        <div style="font-size: 50px;">
+@** --[ 見出し ]---------------------------------------------------------- *@
+  <h2 class="content__section header text-center" style="font-size: 50px">
+    おもしろい人を
+  </h2>
+  <h1 class=" text-center" style="font-size: 100px">探す!</h1>
+  <div class="justify-content-center mb-5" style="display: flex;">
+    <input class="col-6" type="text" style="height: 6vw; border-radius: 15px; border: #f4d100 solid 2px;">
+  </div>
+  <div style="display: flex;">
+    <div class="offset-1 col-10" style="border-radius: 15px; background-color: #f4d100">
+      @** --[ 一覧 ]-------------------------------------------------------- *@
+      <div class="content__section content">
         @for(review <- vv.reviews) {
-            <div class="card">
-                <img src="https://tinyjpg.com/images/social/website.jpg">
+          <article class="facility-list-item">
+            <a href="#" style="color: #010101">
+              <div class="item-panel__wrapper">
                 <header class="facility-item__header">
-                    <div class="name">
-                    title = @review.title
+                  <div class="name" style="font-size: 35px;">
+                    @review.title
                   </div>
                 </header>
-                <section class="facility-item__content">
-                    <div>
-                    @review.body
-                    </div>
+                <section class="facility-item__content" style="font-size: 30px;">
+                  <div>
+                      @review.body
+                  </div>
                 </section>
             </div>
         }
