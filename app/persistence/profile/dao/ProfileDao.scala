@@ -16,6 +16,7 @@ import play.api.db.slick.HasDatabaseConfigProvider
 import persistence.profile.model.Profile
 import persistence.cast.model.Cast
 import persistence.geo.model.Location
+import persistence.store.model.Store
 
 // DAO: 施設情報
 //~~~~~~~~~~~~~~~~~~
@@ -38,12 +39,12 @@ class ProfileDAO @javax.inject.Inject()(
         .result.headOption
     }
   
-  // def get_store_id(id: String): Future[Option[Profile]] =
-  //   db.run {
-  //     slick
-  //       .filter(_.user_id === id)
-  //       .result.headOption
-  //   }
+  def findByStoreId(ids: Seq[Store.Id]): Future[Seq[Profile]] =
+    db.run {
+      slick
+        .filter(_.store_id inSet ids)
+        .result
+    }
 
   /**
    * 施設を全件取得する
@@ -61,8 +62,8 @@ class ProfileDAO @javax.inject.Inject()(
     /* @1 */ def id            = column[Profile.Id]     ("id", O.PrimaryKey, O.AutoInc)
     /* @2 */ def comment       = column[String]         ("comment")
     /* @3 */ def description   = column[String]         ("description")
-    /* @4 */ def user_id       = column[String]         ("user_id")
-    /* @5 */ def store_id      = column[String]         ("store_id")
+    /* @4 */ def user_id       = column[Long]         ("user_id")
+    /* @5 */ def store_id      = column[Long]         ("store_id")
 
     // The * projection of the table
     def * = (

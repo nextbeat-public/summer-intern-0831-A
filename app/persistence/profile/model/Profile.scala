@@ -18,8 +18,8 @@ case class Profile(
   id:          Option[Profile.Id],      // 施設ID
   comment:     String,                  // コメント
   description: String,                  // 詳細
-  user_id:     String,                  // ユーザーID
-  store_id:    String,                  // 店ID
+  user_id:     Profile.UserId,                  // ユーザーID
+  store_id:    Profile.StoreId                  // 店ID
 )
 
 // コンパニオンオブジェクト
@@ -28,5 +28,9 @@ object Profile {
 
   // --[ 管理ID ]---------------------------------------------------------------
   type Id = Long
+
+  type UserId = Long
+
+  type StoreId = Long
 
 }
