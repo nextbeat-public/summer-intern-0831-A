@@ -17,7 +17,7 @@
     "jquery": "^3.2.1",
     "jquery-validation": "^1.17.0",
     "jquery.loadtemplate": "^1.5.10",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "node-sass": "^4.5.2",
     "optimize-css-assets-webpack-plugin": "4.0.3",
     "postcss-loader": "2.1.5",
